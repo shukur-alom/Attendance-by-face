@@ -1,17 +1,44 @@
-import cv2,os,pickle
+import cv2,os
+from pickle import load,dump
 import face_recognition
 
-encodin_list , class_name = [],[]
+encodin_list = load( open( "encodin list.p", "rb" ) )
+class_name = load( open( "class name.p", "rb" ) )
 
-for i in os.listdir('data'):
+user_inp = int(input("1. Add one picture and Training\n2. Add more picture and Training\n3. Clear all previous record data\nChoose One : "))
 
-    img = cv2.cvtColor(cv2.imread(f"data/{i}"), cv2.COLOR_BGR2RGB)
+def add_data(img_path):
+
+    img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
+
     encodin_list.append( face_recognition.face_encodings(img)[0] )
-    class_name.append(i.split()[0])
 
-print(class_name)
+    nam = img_path.split('/')[-1]
 
-pickle.dump( encodin_list, open( "encodin list.p", "wb" ) )
-pickle.dump( class_name, open( "class name.p", "wb" ) )
+    class_name.append(nam.split()[0])
 
-print("Training Done........")
+
+if user_inp == 1:
+    dic_tory = input("The location of the picture you want to add : ")
+
+    add_data(dic_tory)
+
+    dump( encodin_list, open( "encodin list.p", "wb" ) )
+    dump( class_name, open( "class name.p", "wb" ) )
+
+
+elif user_inp == 2:
+    
+    dic_tory = input("The folder location of the images you want to add: ")
+
+    for i in os.listdir(dic_tory):
+        add_data(f"{dic_tory}/{i}")
+
+    dump( encodin_list, open( "encodin list.p", "wb" ) )
+    dump( class_name, open( "class name.p", "wb" ) )
+
+elif user_inp == 3:
+    dump( [], open( "encodin list.p", "wb" ) )
+    dump( [], open( "class name.p", "wb" ) )
+
+print("\nDone........")
