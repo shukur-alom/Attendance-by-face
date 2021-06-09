@@ -16,9 +16,7 @@ def attendence(name):
         for line in myData:
             entry = line.split(',')[0]
             namelist.append(entry)
-
         if name not in namelist:
-
             f.writelines(f"\n{name},{datetime.now()}")
 
 def detact_human(img_s):
@@ -39,14 +37,13 @@ def detact_human(img_s):
             find = argmin(faceDis)
             name = class_name[find].upper()
 
-            if str(name in name_) == 'False' and faceDis[find]*100 < 54.00:
+            if str(name in name_) == 'False' and faceDis[find]*100 < 52.00:
                 faceLoc_.append(faceLoc)
                 name_.append(name)
 
     return faceLoc_,name_
 
 cap = cv2.VideoCapture(0)
-start = timeit.default_timer()
 
 while 1:
 
@@ -63,13 +60,7 @@ while 1:
         cv2.rectangle(img, (x1,y1), (x2,y2), (0,255,0),2 )
 
         cv2.putText(img, name, (x1+6 ,y2-6), cv2.FONT_HERSHEY_SIMPLEX, 0.50, (0,255,255), 2)
-
-    stop = timeit.default_timer()
-
-    cv2.putText(img, f'wait for : {round(4-(stop-start),2)}', (10 ,25), cv2.FONT_HERSHEY_SIMPLEX, 0.50, (214, 211, 0), 2)
-    if (stop-start) >= 3.0: 
         attendence(name)
-        start= timeit.default_timer()
 
     cv2.imshow("Cam_1", img)
     if cv2.waitKey(1) == ord('q'): break
