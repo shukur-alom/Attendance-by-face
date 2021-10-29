@@ -11,16 +11,16 @@ def add_data(img_path):
 
     img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
 
-    encodin_list.append( face_recognition.face_encodings(img)[0] )
-
+    try:encodin_list.append( face_recognition.face_encodings(img)[0] )
+    except:print(f"Face not Detacted. remove {img_path.split('/')[-1]}")
+    
     nam = img_path.split('/')[-1]
-
     class_name.append(nam.split()[0])
-
+    
 
 if user_inp == 1:
+    
     dic_tory = input("The location of the picture you want to add : ")
-
     add_data(dic_tory)
 
     dump( encodin_list, open( "encodin list.p", "wb" ) )
