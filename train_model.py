@@ -17,6 +17,8 @@ def add_data(img_path):
     nam = img_path.split('/')[-1]
     class_name.append(nam.split()[0])
     
+    print(F"Done {nam}")
+    
 
 if user_inp == 1:
     
@@ -32,6 +34,7 @@ elif user_inp == 2:
     dic_tory = input("The folder location of the images you want to add: ")
 
     for i in os.listdir(dic_tory):
+        
         add_data(f"{dic_tory}/{i}")
 
     dump( encodin_list, open( "encodin list.p", "wb" ) )
