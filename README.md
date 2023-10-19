@@ -23,7 +23,7 @@ python train_model.py
 2. Run main_work.py to detect faces, check for matches in the dataset, and add data to the CSV file:
    
 ```
-   python main_work.py
+python main_work.py
 ```
 
 The system will update the CSV file with corresponding data if a match is found.
