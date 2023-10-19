@@ -1,7 +1,29 @@
-# Give-attendance-by-your-appearance
+# Face Detection and Data Addition System
 
-This system will detect your face first , then check if your face are matches the data set, If it matches then he will add your data csv file.
+This system is designed to detect faces in video, check if they match a predefined dataset, and add corresponding data to a CSV file. To use the system, follow these steps:
 
-It's just a job you can modify it if you want and use it for many more things.
+## Prerequisites
 
-But remember that the name of your picture must be like that "Shukur 1.jpg"
+- Python
+- Install the required libraries by running:
+
+```
+  pip install -r requirements.txt
+```
+
+
+## Image Naming Convention
+Ensure your image files follow this naming convention: "Name Number.jpg" (e.g., "Shukur 1.jpg").
+
+1. Run train_model.py to train the face detection model:
+
+```
+python train_model.py
+```
+2. Run main_work.py to detect faces, check for matches in the dataset, and add data to the CSV file:
+   
+```
+   python main_work.py
+```
+
+The system will update the CSV file with corresponding data if a match is found.
